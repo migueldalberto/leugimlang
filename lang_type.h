@@ -1,0 +1,12 @@
+#ifndef LANG_TYPE_H
+#define LANG_TYPE_H
+
+enum LANG_TYPE {
+	LANG_STRING,
+	LANG_INTEGER,
+	LANG_BOOLEAN,
+	LANG_ANY,
+	LANG_NULL
+};
+
+#endif

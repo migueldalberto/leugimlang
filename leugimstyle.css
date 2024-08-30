@@ -1,0 +1,17 @@
+body {
+	background: #251758;
+	color: #605293;
+	font-size: 150%;
+}
+
+h1, h2, h3, h4 {
+	color: #877CB0;
+	color: #2D4471;
+}
+
+.log {
+	font-family: "monospace";
+	color: #877CB0;
+	height: 20em;
+	overflow: scroll;
+}

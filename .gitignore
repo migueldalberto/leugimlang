@@ -1,0 +1,7 @@
+*.swp
+*.o
+leugimlang
+test
+test.c
+source.txt
+out.html
