@@ -48,11 +48,11 @@ const char *token_type_to_string(enum token_type type) {
 		case EQUAL_EQUAL_TOKEN: return "EQUAL_EQUAL";
 		case INTEGER_LITERAL_TOKEN: return "INTEGER_LITERAL";
 		case STRING_LITERAL_TOKEN: return "STRING_LITERAL";
-		case PRINT_TOKEN: return "KW_PRINT";
-		case TRUE_TOKEN: return "KW_TRUE";
-		case FALSE_TOKEN: return "KW_FALSE";
-		case VAR_TOKEN: return "KW_VAR";
-		case WHILE_TOKEN: return "KW_WHILE";
+		case PRINT_TOKEN: return "PRINT";
+		case TRUE_TOKEN: return "TRUE";
+		case FALSE_TOKEN: return "FALSE";
+		case VAR_TOKEN: return "VAR";
+		case WHILE_TOKEN: return "WHILE";
 		case IDENTIFIER_TOKEN: return "IDENTIFIER";
 		case EOF_TOKEN: return "EOF";
 		default: return "_";
