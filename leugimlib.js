@@ -1,8 +1,7 @@
-const body = document.querySelector("body")
 const log_div = document.createElement("div")
-body.appendChild(log_div)
+document.body.appendChild(log_div)
 
-function print (str) {
+function escrever (str) {
 	const p = document.createElement("p")
 	p.textContent = str
 	log_div.appendChild(p)
@@ -11,4 +10,18 @@ function print (str) {
 	if (log_div.children.length > 64) {
 		log_div.removeChild(log_div.firstChild)
 	}
+}
+
+function limpar () {
+	log_div.innerHTML = ''
+}
+
+function def_titulo (str) {
+	document.title = str
+}
+
+function ad_img (str) {
+	const img = document.createElement("img")
+	img.src = str
+	document.body.appendChild(img)
 }

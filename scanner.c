@@ -5,14 +5,16 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define N_OF_KEYWORDS 6
+#define N_OF_KEYWORDS 8
 
 struct keyword keywords[] = {
-	{ .string = "escrever", 	.type = PRINT_TOKEN },
+	{ .string = "escreveR", 	.type = PRINT_TOKEN },
 	{ .string = "var", 			.type = VAR_TOKEN },
 	{ .string = "verdadeiro", 	.type = TRUE_TOKEN },
 	{ .string = "falso", 		.type = FALSE_TOKEN },
 	{ .string = "enquanto", 	.type = WHILE_TOKEN },
+	{ .string = "se", 			.type = IF_TOKEN },
+	{ .string = "senao", 		.type = ELSE_TOKEN },
 	{ .string = "fim", 			.type = END_TOKEN }
 };
 

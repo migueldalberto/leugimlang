@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "scanner.h"
 #include "parser.h"
@@ -7,7 +8,7 @@
 #include "token.h"
 #include "transpiler.h"
 
-void run(char *source);
+void run(char *source, FILE *out);
 
 int main(int argc, char *argv[]) {
 	if (argc == 1) {
@@ -44,26 +45,34 @@ int main(int argc, char *argv[]) {
 	fclose(f);
 
 	buf[length] = '\0';
-	run(buf);
 
+	int name_length = strlen(argv[1]);
+	int extension_length = strlen(strrchr(argv[1], '.'));
+	char *output_filename = (char *) malloc((name_length + extension_length - 3) * sizeof(char));
+	strcpy(output_filename, argv[1]);
+	strcpy(strrchr(output_filename, '.'), ".html");
+	printf("%s\n", output_filename);
+
+	FILE *output_stream = fopen(output_filename, "w");
+	free(output_filename);
+
+	run(buf, output_stream);
+
+	fclose(output_stream);
 	free(buf);
 
 	return 0;
 }
 
-void run(char *source) {
+void run(char *source, FILE* out) {
 	token_list_t *token_list = get_tokens(source);
 
-	// for (int i = 0; i < token_list->length; ++i) {
-		// print_token(token_list->tokens[i]);
-	// }
+	for (int i = 0; i < token_list->length; ++i) {
+		print_token(token_list->tokens[i]);
+	}
 
 	stmt_list_t *stmt_list = parse_tokens(token_list);
 
-	// for (int i = 0; i< stmt_list->length; ++i)
-		// stmt_simple_print(&stmt_list->stmts[i]);
-	// interpret(stmt_list, env);
-	
-	js_transpile(stdout, stmt_list);
+	js_transpile(out, stmt_list);
 }
 

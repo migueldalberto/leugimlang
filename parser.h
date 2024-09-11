@@ -17,6 +17,7 @@ expr_t *parse_comparison (token_list_t *token_list, int *position);
 expr_t *parse_term (token_list_t *token_list, int *position);
 expr_t *parse_factor (token_list_t *token_list, int *position);
 expr_t *parse_unary (token_list_t *token_list, int *position);
+expr_t *parse_call (token_list_t *token_list, int *position);
 expr_t *parse_primary (token_list_t *token_list, int *position);
 
 #endif

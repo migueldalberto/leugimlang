@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 void print_with_indent(expr_t *expr, int indent_number) {
 	char *indent = (char *) malloc(2 * indent_number * sizeof(char) + 1);
@@ -48,6 +49,28 @@ void print_with_indent(expr_t *expr, int indent_number) {
 	};
 
 	free(indent);
+}
+
+void init_expr_list(expr_list_t *list) {
+	assert(list != NULL);
+	list->capacity = 1;
+	list->length = 0;
+	list->exprs = (expr_t *) malloc(sizeof(expr_t));
+}
+
+void expr_list_add(expr_list_t *list, expr_t expr) {
+	if (list->length == list->capacity) {
+		list->capacity *= 2;
+		expr_t *new_list = (expr_t *) malloc(list->capacity * sizeof(expr_t));
+		for (int i = 0; i < list->length; ++i)
+			new_list[i] = list->exprs[i];
+
+		free(list->exprs);
+		list->exprs = new_list;
+	}
+
+	list->exprs[list->length] = expr;
+	list->length += 1;
 }
 
 void expr_simple_print(expr_t *expr) {

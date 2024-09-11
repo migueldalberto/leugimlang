@@ -19,12 +19,14 @@ struct stmt {
 	enum {
 		STMT_PRINT,
 		STMT_WHILE,
+		STMT_IF,
 		STMT_EXPRESSION,
 		STMT_DECLARATION
 	} tag;
 	union {
 		struct STMT_PRINT { expr_t *expr; } stmt_print;
 		struct STMT_WHILE { expr_t *condition; stmt_list_t *stmt_list; } stmt_while;
+		struct STMT_IF { expr_t *condition; stmt_list_t *if_block; stmt_list_t *else_block; } stmt_if;
 		struct STMT_EXPRESSION { expr_t *expr; } stmt_expression;
 		struct STMT_DECLARATION { token_t *identifier; expr_t *expr; } stmt_declaration;
 	} data;

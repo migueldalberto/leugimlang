@@ -69,6 +69,23 @@ char *js_transpile_stmt(stmt_t *stmt) {
 			}
 			strcat(line, "}\n");
 			break;
+		case STMT_IF:
+			strcat(line, "if (");
+			strcat(line, stringify_expression(*stmt->data.stmt_if.condition));
+			strcat(line, ") {\n");
+			for (int i = 0; i <stmt->data.stmt_if.if_block->length; ++i) {
+				char *if_line = js_transpile_stmt(&stmt->data.stmt_if.if_block->stmts[i]);
+				strcat(line, if_line);
+				free(if_line);
+			}
+			strcat(line, "} else {\n");
+			for (int i = 0; i <stmt->data.stmt_if.else_block->length; ++i) {
+				char *else_line = js_transpile_stmt(&stmt->data.stmt_if.else_block->stmts[i]);
+				strcat(line, else_line);
+				free(else_line);
+			}
+			strcat(line, "}\n");
+			break;
 		case STMT_DECLARATION:
 			strcat(line, "let ");
 			strcat(line, stmt->data.stmt_declaration.identifier->literal);
@@ -95,7 +112,11 @@ char *stringify_expression(expr_t expr) {
 			sprintf(str, "%d", *(int *) expr.data.expr_integer_literal.value);
 			break;
 		case EXPR_STRING_LITERAL:
-			str = expr.data.expr_string_literal.value;
+			str = (char *) malloc((strlen(expr.data.expr_string_literal.value) + 2) * sizeof(char));
+			str[0] = '\0';
+			strcat(str, "\"");
+			strcat(str, expr.data.expr_string_literal.value);
+			strcat(str, "\"");
 			break;
 		case EXPR_UNARY:
 			str = (char *) malloc(40 * sizeof(char));
@@ -112,6 +133,19 @@ char *stringify_expression(expr_t expr) {
 			strcat(str, (char *) expr.data.expr_assignment.operator->lexeme);
 			strcat(str, " ");
 			strcat(str, stringify_expression(*expr.data.expr_assignment.right));
+			break;
+		case EXPR_CALL:
+			str = (char *) malloc(40 * sizeof(char));
+			str[0] = '\0';
+			strcat(str, stringify_expression(*expr.data.expr_call.callee));
+			strcat(str, "(");
+			for (int i = 0; i < expr.data.expr_call.args->length; ++i) {
+				strcat(str, stringify_expression(expr.data.expr_call.args->exprs[i]));
+				if (i + 1 != expr.data.expr_call.args->length) {
+					strcat(str, ", ");
+				}			
+				strcat(str, ")");
+			}
 			break;
 		case EXPR_BINARY:
 			str = (char *) malloc(40 * sizeof(char));

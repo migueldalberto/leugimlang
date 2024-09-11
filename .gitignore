@@ -1,5 +1,7 @@
 *.swp
 *.o
+*.lgl
+*.html
 leugimlang
 test
 test.c

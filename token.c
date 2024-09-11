@@ -53,6 +53,8 @@ const char *token_type_to_string(enum token_type type) {
 		case FALSE_TOKEN: return "FALSE";
 		case VAR_TOKEN: return "VAR";
 		case WHILE_TOKEN: return "WHILE";
+		case IF_TOKEN: return "IF";
+		case ELSE_TOKEN: return "ELSE";
 		case IDENTIFIER_TOKEN: return "IDENTIFIER";
 		case EOF_TOKEN: return "EOF";
 		default: return "_";
