@@ -13,26 +13,5 @@ test: test.c $(OBJS)
 clean:
 	rm -f $(OUT) $(OBJS)
 
-scanner.o: scanner.h scanner.c
-	gcc -c scanner.c
-
-token.o: token.h token.c
-	gcc -c token.c
-
-parser.o: parser.h parser.c
-	gcc -c parser.c
-
-stmt.o: stmt.h stmt.c
-	gcc -c stmt.c
-
-expr.o: expr.h expr.c
-	gcc -c expr.c
-
-interpreter.o: interpreter.h interpreter.c
-	gcc -c interpreter.c
-
-environment.o: environment.h environment.c
-	gcc -c environment.c
-
-transpiler.o: transpiler.h transpiler.c 
-	gcc -c transpiler.c
+*.o: *.c
+	gcc -c $^
